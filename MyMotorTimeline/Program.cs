@@ -1,9 +1,25 @@
+using Microsoft.EntityFrameworkCore;
+using MyMotorTimeline.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//incluir dbcontext
+builder.Services.AddDbContext<MyMotorDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyMotorDbContext")));
+
+
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<MyMotorDbContext>();
+    DbSeeder.Seed(context);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
