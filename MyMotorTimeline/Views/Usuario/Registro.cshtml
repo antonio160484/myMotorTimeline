@@ -1,0 +1,86 @@
+﻿@model UsuarioViewModel
+@{
+}
+<style>
+.card-custom {
+            background-color: #1E1E1E !important;
+            border: 1px solid #333;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+</style>
+
+<html>
+<body class="">
+    <div class="container d-flex flex-column align-items-center py-5">
+        
+       
+        <!-- Card -->
+        <div class="card-custom">
+            <div class="mb-4">
+                <h1 class="h4 fw-bold text-white mb-1" >Crea tu cuenta</h1>
+                <p class="text-secondary small">Comienza a gestionar tu flota hoy mismo.</p>
+            </div>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-bg-danger"> </div>
+                <!-- Name -->
+                <div class="mb-4">
+                    <label class="form-label small fw-medium text-secondary" asp-for="Nombre"></label>
+                    <div class="input-wrapper">
+                    <input asp-for="Nombre" class="form-control form-control-custom" type="text" />
+                    <span asp-validation-for="Nombre" class="text-bg-danger">   </span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-medium text-secondary" asp-for="Apellido"></label>
+                    <div class="input-wrapper">
+                    <input asp-for="Apellido" class="form-control form-control-custom" type="text" />
+                    <span asp-validation-for="Apellido" class="text-bg-danger">   </span>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label small fw-medium text-secondary" asp-for="Email"></label>
+                    <div class="input-wrapper">
+                        <input asp-for="Email" class="form-control form-control-custom" type="email" />
+                        <span asp-validation-for="Email" class="text-bg-danger">   </span>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="mb-3">
+                    <label class="form-label small fw-medium text-secondary" asp-for="Clave"></label>
+                    <div class="input-wrapper">
+                        <input autocomplete="new-password" asp-for="Clave" class="form-control form-control-custom" type="password" />
+						<span asp-validation-for="Clave" class="text-bg-danger">   </span>
+                    </div>
+                </div>
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                    <label class="form-label small fw-medium text-secondary" asp-for="ConfirmarClave"></label>
+                    <div class="input-wrapper">
+                        <input autocomplete="new-password" asp-for="ConfirmarClave" class="form-control form-control-custom" p type="password" />
+						<span asp-validation-for="ConfirmarClave" class="text-bg-danger">   </span>
+                    </div>
+                </div>
+                <!-- Terms -->
+                <div class="form-check mb-4">
+                    <input class="form-check-input" id="termsCheck" style="background-color: #121212; border-color: #333;" type="checkbox" />
+                    <label class="form-check-label small text-secondary" for="termsCheck">
+                        Acepto los <a class="text-primary-custom text-decoration-none" href="#">términos de servicio</a> y la <a class="text-primary-custom text-decoration-none" href="#">política de privacidad</a>.
+                    </label>
+                </div>
+                <!-- Submit -->
+                <button class="btn btn-primary-custom w-100 text-white" type="submit">Registrarse</button>
+            </form>
+            <div class="mt-4 pt-4 border-top border-secondary opacity-50 text-center">
+                <p class="small text-secondary mb-0">
+                    ¿Ya tienes cuenta? <a asp-action="Login" class="text-primary-custom fw-bold text-decoration-none" >Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+        
+    </div>
+</body></html>

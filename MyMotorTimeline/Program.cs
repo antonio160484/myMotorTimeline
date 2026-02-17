@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyMotorTimeline.Data;
+using MyMotorTimeline.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,35 @@ builder.Services.AddControllersWithViews();
 //incluir dbcontext
 builder.Services.AddDbContext<MyMotorDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyMotorDbContext")));
+
+//incluir identity
+builder.Services.AddIdentityCore<Usuario>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 3;
+    options.Password.RequireUppercase = false;
+}
+)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<MyMotorDbContext>()
+    .AddSignInManager<SignInManager<Usuario>>();
+
+//Manejo de la cookie. Lo ponemos en default
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+})
+    .AddIdentityCookies();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.SlidingExpiration = true;
+    options.LoginPath = "/Usuario/Login";
+    options.AccessDeniedPath = "/Usuario/AccessDenied";
+});
+
 
 
 
@@ -32,6 +63,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
