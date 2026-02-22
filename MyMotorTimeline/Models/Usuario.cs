@@ -35,4 +35,15 @@ namespace MyMotorTimeline.Models
         public string ConfirmarClave { get; set; }
 
     }
+
+    public class LoginViewModel
+    {
+        [Required(ErrorMessage = "Debe ingresar su correo electrónico")]
+        [EmailAddress(ErrorMessage = "Debe ingresar un correo electrónico válido")]
+        public string Email { get; set; }
+        [PasswordPropertyText]
+        [Required(ErrorMessage = "Debe ingresar su contraseña")]
+        public string Clave { get; set; }
+        public bool Recordarme { get; set; }
+    }
 }

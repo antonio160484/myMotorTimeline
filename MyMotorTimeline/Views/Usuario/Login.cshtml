@@ -1,0 +1,65 @@
+﻿@model LoginViewModel
+@{
+}
+
+<head>
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+
+
+<div class="container py-5">
+	<div class="text-center mb-4">
+		<h1 class="h3 fw-bold text-white mb-1">MyMotorTimeLine</h1>
+		<p class="text-secondary small">Gestión inteligente de flotas</p>
+	</div>
+
+	<!-- Card Container -->
+	<div class="card bg-dark border-secondary p-4 p-md-5 shadow-lg mx-auto" style="max-width: 440px;">
+		<h2 class="h5 fw-semibold mb-4 text-center text-white">Bienvenido de nuevo</h2>
+		<form method="Post">
+			<!-- Email Field -->
+			<div class="mb-3">
+				<label class="text-secondary small" for="email">Correo electrónico</label>
+				<div class="input-group">
+					<span class="input-group-text bg-dark border-secondary text-secondary"><span class="material-symbols-outlined">Mail</span></span>
+					<input asp-for="Email" class="form-control bg-dark border-secondary text-white"  placeholder="correo@ejemplo.com"  />
+					<span asp-validation-for="Email" class="text-bg-danger" ></span>
+				</div>
+			</div>
+			<!-- Password Field -->
+			<div class="mb-3">
+				<div class="d-flex justify-content-between mb-1">
+					<label class="text-secondary small" for="password">Contraseña</label>
+					<a class="small text-primary text-decoration-none" href="#">¿Olvidaste tu contraseña?</a>
+				</div>
+				<div class="input-group">
+					<span class="input-group-text bg-dark border-secondary text-secondary"><span class="material-symbols-outlined">lock</span></span>
+					<input asp-for="Clave" class="form-control bg-dark border-secondary text-white" placeholder="••••••••" /> 
+					<span asp-validation-for="Clave" class="text-bg-danger"></span>
+					<span class="input-group-text bg-dark border-secondary text-secondary">
+						<button class="btn btn-link p-0 text-muted-custom text-decoration-none" type="button">
+							<span class="material-symbols-outlined">visibility</span>
+						</button>
+					</span>
+				</div>
+			</div>
+			<!-- Remember Me -->
+			<div class="form-check mb-4">
+				<input class="form-check-input border-secondary" asp-for="Recordarme"/>
+				<label class="text-secondary small" >Recordarme</label>
+			</div>
+			<!-- Submit Button -->
+			<button class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2" type="submit">
+				<span>Iniciar Sesión</span>
+				<span class="material-symbols-outlined">login</span>
+			</button>
+
+			<p class="text-secondary small">
+				¿No tienes cuenta?
+				<a class="small text-primary text-decoration-none" href="#">Regístrate gratis</a>
+			</p>
+		</form>
+	</div>
+	<!-- Social Login Divider -->
+
+</div>
