@@ -12,11 +12,13 @@ namespace MyMotorTimeline.Models
         [Required (ErrorMessage="Debe Ingresar un Modelo de automóvil")]
         [StringLength(50)]
         public string Modelo { get; set; }
+        [Required (ErrorMessage="Debe Ingresar una Patente")]
+        [StringLength(20)]
+        public string Patente { get; set; }
         [Required (ErrorMessage="Debe Ingresar un Año de fabricación del automóvil")]
         [Range(1886, 2100, ErrorMessage = "El año debe ser entre 1886 y 2100")]
         public int Anio { get; set; }
         [Required (ErrorMessage="Debe Ingresar un Kilometraje actual del automóvil")]
-        [StringLength(50)]
         [Range(0, int.MaxValue, ErrorMessage = "El kilometraje debe ser un número positivo")]
         public int KilometrajeActual { get; set; }
         public string? UrlImagen { get; set; }

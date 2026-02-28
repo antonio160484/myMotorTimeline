@@ -1,0 +1,55 @@
+﻿@model MyMotorTimeline.Models.Vehiculo
+@{
+}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-5">
+
+                <h3 class="text-center mb-4">Agregar Vehículo</h3>
+
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-bg-danger"> </div>
+                    <div class="mb-3">
+                        <label asp-for="Marca" class="form-label"></label>
+                        <input asp-for="Marca" class="form-control" />
+                        <span asp-validation-for="Marca" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Modelo" class="form-label"></label>
+                        <input asp-for="Modelo" class="form-control" />
+                        <span asp-validation-for="Modelo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Anio" class="form-label"></label>
+                        <input asp-for="Anio" class="form-control" />
+                        <span asp-validation-for="Anio" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="KilometrajeActual" class="form-label"></label>
+                        <input asp-for="KilometrajeActual" class="form-control" />
+                        <span asp-validation-for="KilometrajeActual" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Patente" class="form-label"></label>
+                        <input asp-for="Patente" class="form-control text-uppercase" />
+                        <span asp-validation-for="Patente" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Guardar Vehículo
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

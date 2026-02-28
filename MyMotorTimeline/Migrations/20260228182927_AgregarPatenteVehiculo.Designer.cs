@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMotorTimeline.Data;
 
@@ -11,9 +12,11 @@ using MyMotorTimeline.Data;
 namespace MyMotorTimeline.Migrations
 {
     [DbContext(typeof(MyMotorDbContext))]
-    partial class MyMotorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260228182927_AgregarPatenteVehiculo")]
+    partial class AgregarPatenteVehiculo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -22,6 +22,10 @@ namespace MyMotorTimeline.Data
             modelBuilder.Entity<MantenimientoRealizado>()
                 .Property(m => m.Costo)
                 .HasPrecision(10,2); // Configura el tipo de datos para el costo
+
+            modelBuilder.Entity<Vehiculo>()
+                .HasIndex(v => new { v.Patente, v.UsuarioId })
+                .IsUnique(); // Configura la patente como un campo único
         }
 
     }
