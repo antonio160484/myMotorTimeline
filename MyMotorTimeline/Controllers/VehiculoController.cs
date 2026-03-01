@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyMotorTimeline.Data;
@@ -6,6 +7,7 @@ using MyMotorTimeline.Models;
 
 namespace MyMotorTimeline.Controllers
 {
+    [Authorize]
     public class VehiculoController : Controller
     {
         private readonly MyMotorDbContext _context;
@@ -36,6 +38,7 @@ namespace MyMotorTimeline.Controllers
         // POST: VehiculoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(Vehiculo vehiculo)
         {
             if (!ModelState.IsValid)
@@ -43,9 +46,13 @@ namespace MyMotorTimeline.Controllers
                 return View(vehiculo);
             }
 
-          
-            var usuarioId = _userManager.GetUserId(User);
-            vehiculo.UsuarioId = usuarioId;
+            var usuario = await _userManager.GetUserAsync(User);
+            if (usuario == null)
+            {
+                return View(vehiculo);
+            }
+
+            vehiculo.UsuarioId = usuario.Id;
             vehiculo.Patente = vehiculo.Patente?.Trim().ToUpper(); // Convertir la patente a mayúsculas
 
             _context.Add(vehiculo);

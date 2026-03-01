@@ -1,16 +1,41 @@
-﻿@{
+﻿@model List<Vehiculo>
+@{
 	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-	<h1 class="display-4">Bienvenido usuario</h1>
-	<h4>Estas en MyMotorTimeLine, tu espacio para gestionar el historial y el mantenimiento de tus vehiculos en un solo lugar</h4>
-	<h5>Todavía no tenés vehículos registrados. Agregá el primero para comenzar a llevar tu historial de mantenimiento. </h5>
-</div>
-<!--insertar boton "agregar vehiculo"-->
-<div class="d-flex justify-content-center mt-4">
-	<a asp-controller="Vehiculo" asp-action="Create" class="btn btn-primary btn-lg">
-		<i class="bi bi-plus-lg me-2"></i>
-		Agregar Vehículo
-	</a>
-</div>
+@if (!Model.Any())
+{
+	<div class="text-center">
+		<h1 class="display-4">Bienvenido!</h1>
+		<h4>Estas en MyMotorTimeLine, tu espacio para gestionar el historial y el mantenimiento de tus vehiculos en un solo lugar</h4>
+		<h5>Todavía no tenés vehículos registrados. Agregá el primero para comenzar a llevar tu historial de mantenimiento. </h5>
+	</div>
+	<!--insertar boton "agregar vehiculo"-->
+	<div class="d-flex justify-content-center mt-4">
+		<a asp-controller="Vehiculo" asp-action="Create" class="btn btn-primary btn-lg">
+			<i class="bi bi-plus-lg me-2"></i>
+			Agregar Vehículo
+		</a>
+	</div>
+}
+else
+{
+ 	<div class="text-center">
+		<h1 class="display-4">Mis Vehículos</h1>
+		<p class="lead">Aquí puedes ver y gestionar el historial de mantenimiento de tus vehículos registrados.</p>
+	</div>
+	<div class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-4">
+		@foreach (var vehiculo in Model)
+		{
+			<div class="col col-4">
+				<div class="card h-100">
+					<div class="card-body">
+						<h5 class="card-title">@vehiculo.Marca @vehiculo.Modelo (@vehiculo.Anio)</h5>
+						
+						<a asp-controller="Vehiculo" asp-action="Details" asp-route-id="@vehiculo.Id" class="btn btn-primary">Ver Detalles</a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+}

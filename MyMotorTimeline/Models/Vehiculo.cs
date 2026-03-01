@@ -24,9 +24,9 @@ namespace MyMotorTimeline.Models
         public string? UrlImagen { get; set; }
 
         // Dueño del vehículo
-        public string UsuarioId { get; set; }
+        public string? UsuarioId { get; set; }
         [DisplayName("Dueño")]
-        public Usuario Duenio { get; set; }
+        public Usuario? Duenio { get; set; }
 
 
 
