@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyMotorTimeline.Data;
 using MyMotorTimeline.Models;
 
@@ -20,13 +21,27 @@ namespace MyMotorTimeline.Controllers
         // GET: VehiculoController
         public async Task <IActionResult> Index()
         {
+
             return View();
         }
 
+        [Authorize]
         // GET: VehiculoController/Details/5
-        public ActionResult Details(int id)
+        public async Task <IActionResult> Details(int id)
         {
-            return View();
+            var usuarioId = _userManager.GetUserId(User);
+
+            var vehiculo = await _context.Vehiculos
+                .Where(v => v.Id == id && v.UsuarioId == usuarioId)
+                .Include(v => v.MantenimientosRealizados)
+                .Include(v => v.MantenimientosProgramados)
+                .FirstOrDefaultAsync();
+
+            if (vehiculo == null)
+                return NotFound();
+            
+
+            return View(vehiculo);
         }
 
         // GET: VehiculoController/Create

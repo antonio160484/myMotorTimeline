@@ -8,7 +8,6 @@ using MyMotorTimeline.Models;
 
 namespace MyMotorTimeline.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,7 +21,7 @@ namespace MyMotorTimeline.Controllers
             _context = context;
         }
 
-        [Authorize]
+        
         public async Task <IActionResult> Index()
         {
             var usuarioId = _userManager.GetUserId(User);

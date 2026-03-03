@@ -1,0 +1,96 @@
+﻿@model Vehiculo
+@{
+}
+
+<div class="container mt-4">
+	<h1 class="display-4">@Model.Marca @Model.Modelo (@Model.Anio)</h1>
+	<p class="lead">Aquí puedes ver el historial de mantenimiento de tu vehículo.</p>
+	<div class="card col-4">
+		<div class="card-body">
+			<h5 class="card-title">Información del Vehículo</h5>
+			<p class="card-text"><strong>Marca:</strong> @Model.Marca</p>
+			<p class="card-text"><strong>Modelo:</strong> @Model.Modelo</p>
+			<p class="card-text"><strong>Año:</strong> @Model.Anio</p>
+			<p class="card-text"><strong>Patente:</strong> @Model.Patente</p>
+		</div>
+	</div>
+	<div class="d-flex justify-content-end mb-4">
+		<a asp-controller="Vehiculo" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+			<i class="bi bi-pencil-square me-1"></i>
+			Editar Vehículo
+		</a>
+		<a asp-controller="Vehiculo" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+			<i class="bi bi-trash me-1"></i>
+			Eliminar Vehículo
+		</a>
+	</div>
+</div>
+<h2 class="h4 mb-3 pt-5">Historial de Mantenimiento</h2>
+@if (!Model.MantenimientosRealizados.Any())
+{
+	<div class="alert alert-info col-6">
+		Aún no tienes registros de mantenimiento para este vehículo.
+		
+			<a class="justify-content-end">Agregar</a>
+
+	</div>
+
+}
+else
+{
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Fecha</th>
+				<th>Descripción</th>
+				<th>Costo</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var mantenimiento in Model.MantenimientosRealizados)
+			{
+				<tr>
+					<td>@mantenimiento.Fecha.ToShortDateString()</td>
+					<td>@mantenimiento.Descripcion</td>
+					<td>@mantenimiento.Costo.ToString()</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+}
+<h2 class="h4 mb-3 pt-5">Mantenimientos Programados</h2>
+@if(!Model.MantenimientosProgramados.Any())
+{
+	<div class="alert alert-info col-6">
+		Aún no tienes registros de mantenimientos programados para este vehículo.
+		
+			<a class="justify-content-end">Agregar</a>
+	</div>
+}
+else
+{
+	<h2 class="h4 mb-3">Mantenimientos Programados</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Fecha Programada</th>
+				<th>Descripción</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var mantenimiento in Model.MantenimientosProgramados)
+			{
+				<tr>
+					<td>
+						@(mantenimiento.FechaEstimada.HasValue 
+							? mantenimiento.FechaEstimada.Value.ToShortDateString() 
+							: "")
+					</td>
+					<td>@mantenimiento.TipoMantenimiento</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
